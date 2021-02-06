@@ -6,7 +6,7 @@ Yoga Studio Website built using node.js / Express.js
 
 <h2 align="center">Getting Started</h2>
 
-| [Link to Vercel](https://#/) :trollface: | 
+| [Link to Vercel](https://vajra-warrior-express.vercel.app/) :trollface: | 
 | ------------ |
 
 ![Vajra Warrior Yoga 1](https://i.imgur.com/FqxjKlf.png)
