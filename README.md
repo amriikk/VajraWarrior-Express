@@ -1,5 +1,5 @@
-# Vajra Warrior Yoga -- Express
-### :large_blue_circle: John Trujillo :large_blue_circle: -- 2021
+# Vajra Warrior Yoga
+### :large_blue_circle: John Trujillo :large_blue_circle: 2021
 
 <h2 align="center">Introduction</h2>
 Yoga Studio Website built using node.js / Express.js
@@ -31,6 +31,7 @@ Yoga Studio Website built using node.js / Express.js
 
 <h2 align="center">Road Hiccups</h2>
 
+- Stable image links
 
 
 <h2 align="center">Future Scope</h2>
