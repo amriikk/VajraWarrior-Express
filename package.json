@@ -1,14 +1,7 @@
 {
   "name": "vajra-warrior-website",
   "version": "1.0.0",
-  "description": "",
-  "scripts": {
-    "start": "node server.js"
-  },
-  "engines": {
-    "node": "22.x"
-  },
-  "dependencies": {
-    "express": "^4.17.1"
-  }
+  "description": "Boutique warrior-yoga studio landing page — static site",
+  "scripts": {},
+  "engines": { "node": "22.x" }
 }
