@@ -1,238 +1,647 @@
 <!DOCTYPE html>
 <html lang="en">
-<title>Vajra Warrior Yoga</title>
+<head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<title>Vajra Warrior Yoga — A warrior's practice, built on stillness</title>
+<meta name="description" content="Boutique warrior-yoga studio in Los Angeles. Vinyasa, breath, and the strength that holds a pose like the earth holds a mountain. Reserve a class.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Hanken+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
-body {font-family: "Lato", sans-serif}
-.mySlides {display: none}
+  :root{
+    --ink:#15131c;
+    --ink-2:#1b1822;
+    --stone:#221f2c;
+    --stone-line:#322d3e;
+    --brass:#cba24c;
+    --brass-soft:#d8bd7e;
+    --ember:#d7613b;
+    --mist:#efeae1;
+    --haze:#9a93a6;
+    --maxw:1140px;
+    --pad:clamp(20px,5vw,64px);
+    --serif:"Young Serif",Georgia,serif;
+    --sans:"Hanken Grotesk",system-ui,sans-serif;
+    --mono:"Space Mono",ui-monospace,monospace;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+  body{
+    background:var(--ink);
+    color:var(--mist);
+    font-family:var(--sans);
+    font-size:17px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+
+  a{color:inherit;text-decoration:none}
+
+  /* visible keyboard focus everywhere */
+  :focus-visible{outline:2px solid var(--brass);outline-offset:3px;border-radius:2px}
+
+  .wrap{max-width:var(--maxw);margin:0 auto;padding-inline:var(--pad)}
+
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:.72rem;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+    color:var(--brass);
+  }
+
+  .display{
+    font-family:var(--serif);
+    font-weight:400;
+    line-height:.96;
+    letter-spacing:-.01em;
+  }
+
+  /* ---------- skip link ---------- */
+  .skip{
+    position:absolute;left:-999px;top:8px;z-index:200;
+    background:var(--brass);color:var(--ink);padding:10px 16px;border-radius:8px;
+    font-weight:600;
+  }
+  .skip:focus{left:8px}
+
+  /* ---------- header ---------- */
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:80;
+    transition:background .35s ease,border-color .35s ease,backdrop-filter .35s;
+    border-bottom:1px solid transparent;
+  }
+  header.scrolled{
+    background:rgba(21,19,28,.82);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--stone-line);
+  }
+  .bar{display:flex;align-items:center;justify-content:space-between;height:72px}
+  .brand{display:flex;align-items:center;gap:12px;font-family:var(--serif);font-size:1.15rem;letter-spacing:.02em}
+  .brand svg{width:26px;height:26px;flex:none}
+  nav.main{display:flex;align-items:center;gap:30px}
+  nav.main a{font-size:.83rem;letter-spacing:.04em;color:var(--haze);transition:color .2s}
+  nav.main a:hover{color:var(--mist)}
+  .nav-cta{
+    font-family:var(--sans);font-weight:600;font-size:.85rem;
+    border:1px solid var(--brass);color:var(--brass);
+    padding:9px 18px;border-radius:999px;cursor:pointer;background:transparent;
+    transition:background .2s,color .2s;
+  }
+  .nav-cta:hover{background:var(--brass);color:var(--ink)}
+  .menu-btn{display:none;background:none;border:0;color:var(--mist);cursor:pointer;padding:8px}
+  .menu-btn svg{width:26px;height:26px}
+
+  @media (max-width:780px){
+    nav.main{
+      position:fixed;inset:72px 0 auto 0;flex-direction:column;align-items:flex-start;gap:0;
+      background:var(--ink-2);border-bottom:1px solid var(--stone-line);
+      padding:8px var(--pad) 24px;
+      transform:translateY(-120%);transition:transform .3s ease;
+    }
+    nav.main.open{transform:translateY(0)}
+    nav.main a{width:100%;padding:14px 0;font-size:1rem;border-bottom:1px solid var(--stone-line)}
+    nav.main .nav-cta{margin-top:16px;width:100%;padding:13px}
+    .menu-btn{display:inline-flex}
+  }
+
+  /* ---------- hero ---------- */
+  .hero{position:relative;padding:160px 0 90px;overflow:hidden}
+  .hero::before{
+    content:"";position:absolute;inset:0;z-index:-2;
+    background:
+      radial-gradient(120% 90% at 78% 8%,rgba(203,162,76,.16),transparent 55%),
+      radial-gradient(90% 80% at 6% 100%,rgba(215,97,59,.10),transparent 60%),
+      linear-gradient(180deg,#1a1722,#15131c 70%);
+  }
+  /* faint vajra watermark behind hero */
+  .hero-mark{position:absolute;right:-60px;top:60px;z-index:-1;width:min(46vw,520px);opacity:.06;color:var(--brass)}
+  @media (max-width:780px){.hero-mark{opacity:.045;right:-30%;top:30%}}
+
+  .hero .eyebrow{margin-bottom:26px}
+  h1.hero-title{
+    font-family:var(--serif);font-weight:400;
+    font-size:clamp(3.1rem,12vw,8.4rem);
+    line-height:.9;letter-spacing:-.015em;
+  }
+  h1.hero-title .ember{color:var(--brass)}
+  .hero-lede{
+    max-width:42ch;margin-top:30px;font-size:clamp(1.05rem,2.3vw,1.32rem);
+    color:#cfc8d4;line-height:1.55;
+  }
+  .hero-actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:40px;align-items:center}
+  .btn{
+    font-family:var(--sans);font-weight:600;font-size:.98rem;cursor:pointer;
+    padding:15px 28px;border-radius:999px;border:1px solid transparent;
+    transition:transform .15s ease,background .2s,box-shadow .25s;
+  }
+  .btn-primary{background:var(--brass);color:var(--ink);box-shadow:0 0 0 0 rgba(203,162,76,.5)}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 14px 34px -12px rgba(203,162,76,.6)}
+  .btn-ghost{background:transparent;border-color:var(--stone-line);color:var(--mist)}
+  .btn-ghost:hover{border-color:var(--brass);color:var(--brass)}
+  @media (prefers-reduced-motion:reduce){.btn:hover{transform:none}}
+
+  .hero-meta{display:flex;flex-wrap:wrap;gap:28px;margin-top:56px;font-family:var(--mono);font-size:.74rem;letter-spacing:.12em;color:var(--haze);text-transform:uppercase}
+  .hero-meta span{display:flex;align-items:center;gap:9px}
+  .hero-meta span::before{content:"";width:6px;height:6px;background:var(--brass);transform:rotate(45deg)}
+
+  /* ---------- section scaffold ---------- */
+  section{padding:clamp(70px,11vw,128px) 0}
+  .sec-head{display:flex;align-items:baseline;gap:18px;margin-bottom:14px}
+  .sec-num{font-family:var(--mono);font-size:.8rem;color:var(--brass);letter-spacing:.1em}
+  h2{font-family:var(--serif);font-weight:400;font-size:clamp(2rem,5.5vw,3.4rem);line-height:1.02;letter-spacing:-.01em}
+  .sec-sub{color:var(--haze);max-width:54ch;margin-top:18px;font-size:1.05rem}
+
+  /* about */
+  #about{background:var(--ink-2);border-top:1px solid var(--stone-line);border-bottom:1px solid var(--stone-line)}
+  .about-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(36px,6vw,90px);align-items:center}
+  @media (max-width:820px){.about-grid{grid-template-columns:1fr;gap:44px}}
+  .about-body p{color:#cfc8d4;margin-top:22px}
+  .about-body p:first-child{margin-top:28px;font-size:1.18rem;color:var(--mist)}
+  .creed{border-left:2px solid var(--brass);padding-left:26px}
+  .creed dt{font-family:var(--mono);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--brass);margin-top:24px}
+  .creed dt:first-child{margin-top:0}
+  .creed dd{margin-top:6px;color:var(--haze);font-size:.98rem}
+
+  /* warriors */
+  .warriors{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:54px}
+  @media (max-width:860px){.warriors{grid-template-columns:1fr;gap:18px;max-width:520px;margin-inline:auto}}
+  .pose{
+    background:var(--stone);border:1px solid var(--stone-line);border-radius:18px;
+    padding:30px 26px 32px;position:relative;overflow:hidden;
+    transition:border-color .3s,transform .3s;
+  }
+  .pose:hover{border-color:var(--brass);transform:translateY(-4px)}
+  @media (prefers-reduced-motion:reduce){.pose:hover{transform:none}}
+  .pose-fig{height:150px;display:flex;align-items:center;justify-content:center;margin-bottom:22px;
+    background:radial-gradient(80% 80% at 50% 30%,rgba(203,162,76,.10),transparent 70%);border-radius:12px}
+  .pose-fig svg{height:118px;color:var(--brass-soft)}
+  .pose-num{font-family:var(--mono);font-size:.78rem;color:var(--brass);letter-spacing:.12em}
+  .pose h3{font-family:var(--serif);font-weight:400;font-size:1.5rem;margin:10px 0 4px}
+  .pose .sk{font-family:var(--mono);font-size:.72rem;color:var(--haze);letter-spacing:.06em;text-transform:uppercase}
+  .pose p{color:#c4bdca;font-size:.96rem;margin-top:14px}
+
+  /* schedule */
+  #schedule{background:var(--ink-2);border-top:1px solid var(--stone-line)}
+  .sched{margin-top:46px;border-top:1px solid var(--stone-line)}
+  .sched-row{
+    display:grid;grid-template-columns:1.2fr 1fr .8fr auto;gap:20px;align-items:center;
+    padding:24px 4px;border-bottom:1px solid var(--stone-line);
+  }
+  .sched-city{font-family:var(--serif);font-size:1.45rem}
+  .sched-when{font-family:var(--mono);font-size:.84rem;color:var(--haze);letter-spacing:.04em}
+  .tag{font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;padding:5px 11px;border-radius:999px;justify-self:start}
+  .tag.open{color:var(--brass);border:1px solid var(--brass)}
+  .tag.full{color:var(--haze);border:1px solid var(--stone-line)}
+  .row-btn{
+    font-family:var(--sans);font-weight:600;font-size:.86rem;cursor:pointer;justify-self:end;
+    padding:11px 22px;border-radius:999px;border:1px solid var(--brass);background:transparent;color:var(--brass);
+    transition:background .2s,color .2s;
+  }
+  .row-btn:hover:not(:disabled){background:var(--brass);color:var(--ink)}
+  .row-btn:disabled{border-color:var(--stone-line);color:var(--haze);cursor:not-allowed}
+  @media (max-width:720px){
+    .sched-row{grid-template-columns:1fr auto;gap:6px 16px}
+    .sched-when{grid-column:1/2}
+    .tag{grid-row:1;grid-column:2;justify-self:end}
+    .row-btn{grid-column:2;grid-row:2}
+  }
+
+  /* contact */
+  .contact-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(36px,6vw,80px)}
+  @media (max-width:820px){.contact-grid{grid-template-columns:1fr;gap:40px}}
+  .contact-info dt{font-family:var(--mono);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--brass);margin-top:26px}
+  .contact-info dt:first-child{margin-top:32px}
+  .contact-info dd{margin-top:6px;font-size:1.05rem}
+
+  /* forms (shared) */
+  .field{margin-top:20px}
+  .field label{display:block;font-size:.82rem;letter-spacing:.03em;color:var(--haze);margin-bottom:8px;font-weight:500}
+  .field input,.field select,.field textarea{
+    width:100%;background:var(--ink);border:1px solid var(--stone-line);color:var(--mist);
+    border-radius:10px;padding:13px 15px;font-family:var(--sans);font-size:1rem;transition:border-color .2s;
+  }
+  .field textarea{resize:vertical;min-height:110px}
+  .field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--brass)}
+  .field input[aria-invalid="true"],.field select[aria-invalid="true"]{border-color:var(--ember)}
+  .err{color:var(--ember);font-size:.8rem;margin-top:7px;min-height:1em;font-family:var(--mono);letter-spacing:.02em}
+
+  /* ---------- modal ---------- */
+  .overlay{
+    position:fixed;inset:0;z-index:120;display:none;place-items:center;padding:20px;
+    background:rgba(10,9,14,.72);backdrop-filter:blur(6px);
+  }
+  .overlay.open{display:grid;animation:fade .25s ease}
+  @keyframes fade{from{opacity:0}to{opacity:1}}
+  @media (prefers-reduced-motion:reduce){.overlay.open{animation:none}}
+  .modal{
+    width:min(460px,100%);background:var(--stone);border:1px solid var(--stone-line);
+    border-radius:20px;padding:34px 30px 32px;position:relative;max-height:90vh;overflow:auto;
+  }
+  .modal .eyebrow{display:block;margin-bottom:10px}
+  .modal h3{font-family:var(--serif);font-weight:400;font-size:1.85rem;line-height:1.05}
+  .modal .price{font-family:var(--mono);color:var(--brass);margin-top:8px;font-size:.9rem;letter-spacing:.06em}
+  .modal-close{position:absolute;top:16px;right:16px;background:none;border:0;color:var(--haze);cursor:pointer;padding:8px;border-radius:8px}
+  .modal-close:hover{color:var(--mist)}
+  .modal-close svg{width:22px;height:22px}
+  .modal .btn-primary{width:100%;margin-top:26px}
+  .success{text-align:center;padding:14px 0 4px}
+  .success svg{width:54px;height:54px;color:var(--brass);margin-bottom:18px}
+  .success h3{margin-bottom:10px}
+  .success p{color:var(--haze)}
+
+  /* ---------- footer ---------- */
+  footer{border-top:1px solid var(--stone-line);padding:48px 0 56px;color:var(--haze)}
+  .foot{display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between;align-items:center}
+  .foot-brand{display:flex;align-items:center;gap:11px;font-family:var(--serif);color:var(--mist);font-size:1.05rem}
+  .foot-brand svg{width:22px;height:22px}
+  .foot small{font-family:var(--mono);font-size:.72rem;letter-spacing:.06em}
+
+  /* reveal-on-scroll */
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
+  .reveal.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
 </style>
+</head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
 
-    <!-- Navbar -->
-    <div class="w3-top">
-    <div class="w3-bar w3-black w3-card">
-        <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right" href="javascript:void(0)" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
-        <a href="#" class="w3-bar-item w3-button w3-padding-large">HOME</a>
-        <a href="#about" class="w3-bar-item w3-button w3-padding-large w3-hide-small">ABOUT</a>
-        <a href="#classes" class="w3-bar-item w3-button w3-padding-large w3-hide-small">CLASSES</a>
-        <a href="#contact" class="w3-bar-item w3-button w3-padding-large w3-hide-small">CONTACT</a>
-        <div class="w3-dropdown-hover w3-hide-small">
-        <button class="w3-padding-large w3-button" title="More">MORE <i class="fa fa-caret-down"></i></button>     
-        <div class="w3-dropdown-content w3-bar-block w3-card-4">
-            <a href="#" class="w3-bar-item w3-button">Asanas</a>
-            <a href="#" class="w3-bar-item w3-button">Extras</a>
-            <a href="#" class="w3-bar-item w3-button">Merchandise</a>
-        </div>
-        </div>
-        <a href="javascript:void(0)" class="w3-padding-large w3-hover-red w3-hide-small w3-right"><i class="fa fa-search"></i></a>
+<!-- ============ HEADER ============ -->
+<header id="header">
+  <div class="wrap bar">
+    <a class="brand" href="#top" aria-label="Vajra Warrior Yoga home">
+      <svg viewBox="0 0 48 48" fill="none" aria-hidden="true">
+        <!-- stylized vajra / dorje mark -->
+        <path d="M24 3v42" stroke="currentColor" stroke-width="2"/>
+        <path d="M24 9c-3 2.5-7 3-7 3s4 .5 7 3c3-2.5 7-3 7-3s-4-.5-7-3z" fill="currentColor"/>
+        <path d="M24 39c-3-2.5-7-3-7-3s4-.5 7-3c3 2.5 7 3 7 3s-4 .5-7 3z" fill="currentColor"/>
+        <path d="M24 18l5 6-5 6-5-6 5-6z" stroke="currentColor" stroke-width="2" fill="none"/>
+        <path d="M13 22c2 2 2 4 0 6M35 22c-2 2-2 4 0 6" stroke="currentColor" stroke-width="2"/>
+      </svg>
+      <span>Vajra&nbsp;Warrior</span>
+    </a>
+
+    <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="nav">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+
+    <nav class="main" id="nav">
+      <a href="#about">About</a>
+      <a href="#warriors">The Warriors</a>
+      <a href="#schedule">Schedule</a>
+      <a href="#contact">Contact</a>
+      <button class="nav-cta" data-book="">Reserve a class</button>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <!-- ============ HERO ============ -->
+  <section class="hero" id="top">
+    <svg class="hero-mark" viewBox="0 0 200 200" fill="none" aria-hidden="true">
+      <path d="M100 10v180" stroke="currentColor" stroke-width="3"/>
+      <path d="M100 40 L120 70 L100 100 L80 70 Z" stroke="currentColor" stroke-width="3"/>
+      <path d="M100 100 L120 130 L100 160 L80 130 Z" stroke="currentColor" stroke-width="3"/>
+      <path d="M60 60c8 8 8 16 0 24M140 60c-8 8-8 16 0 24" stroke="currentColor" stroke-width="3"/>
+      <path d="M60 116c8 8 8 16 0 24M140 116c-8 8-8 16 0 24" stroke="currentColor" stroke-width="3"/>
+    </svg>
+    <div class="wrap">
+      <p class="eyebrow reveal">Boutique studio — Los Angeles</p>
+      <h1 class="hero-title reveal">Vajra<br><span class="ember">Warrior</span></h1>
+      <p class="hero-lede reveal">A warrior's practice built on stillness — vinyasa, breath, and the strength that holds a pose the way the earth holds a mountain.</p>
+      <div class="hero-actions reveal">
+        <button class="btn btn-primary" data-book="">Reserve a class</button>
+        <a class="btn btn-ghost" href="#warriors">See the practice</a>
+      </div>
+      <div class="hero-meta reveal">
+        <span>Est. 2021</span>
+        <span>Vinyasa &amp; Warrior Flow</span>
+        <span>All levels welcome</span>
+      </div>
     </div>
+  </section>
+
+  <!-- ============ ABOUT ============ -->
+  <section id="about">
+    <div class="wrap about-grid">
+      <div class="about-body reveal">
+        <div class="sec-head"><span class="sec-num">01</span><h2>The indestructible practice</h2></div>
+        <p><em>Vajra</em> means the thunderbolt and the diamond at once — the thing that cannot be broken. That's the practice we teach: a body that's strong enough to be still.</p>
+        <p>We're a small studio. Classes cap at sixteen, so a teacher can actually see you, adjust you, and call you by name. We lean into the warrior poses — grounded, deliberate, demanding — and pair them with the breathwork that makes them sustainable.</p>
+        <p>You don't need to be flexible, fit, or experienced. You need to show up. The rest is built on the mat.</p>
+      </div>
+      <dl class="creed reveal">
+        <dt>Class size</dt><dd>Capped at 16, every session</dd>
+        <dt>Focus</dt><dd>Strength, breath, and balance over performance</dd>
+        <dt>Format</dt><dd>60 &amp; 75-minute vinyasa, all levels</dd>
+        <dt>Founded</dt><dd>Los Angeles, 2021</dd>
+      </dl>
+    </div>
+  </section>
+
+  <!-- ============ WARRIORS ============ -->
+  <section id="warriors">
+    <div class="wrap">
+      <div class="sec-head reveal"><span class="sec-num">02</span><h2>Three warriors, one line of force</h2></div>
+      <p class="sec-sub reveal">Virabhadrasana I, II, and III are a sequence, not three separate poses. Each builds on the last — rooted, then open, then balanced on a single leg.</p>
+
+      <div class="warriors">
+        <article class="pose reveal">
+          <div class="pose-fig"><svg viewBox="0 0 80 120" fill="none" aria-hidden="true"><circle cx="40" cy="16" r="8" fill="currentColor"/><path d="M40 24v34M40 30l-16-8M40 30l16-8M40 58l-14 40M40 58l14 40" stroke="currentColor" stroke-width="4" stroke-linecap="round"/></svg></div>
+          <p class="pose-num">01</p>
+          <h3>The Riser</h3>
+          <p class="sk">Virabhadrasana I</p>
+          <p>Hips square to the front, back heel planted, arms rising overhead. The foundation pose — power drawn straight up from the ground.</p>
+        </article>
+        <article class="pose reveal">
+          <div class="pose-fig"><svg viewBox="0 0 80 120" fill="none" aria-hidden="true"><circle cx="40" cy="16" r="8" fill="currentColor"/><path d="M40 24v30M14 36h52M40 54l-18 44M40 54l18 44" stroke="currentColor" stroke-width="4" stroke-linecap="round"/></svg></div>
+          <p class="pose-num">02</p>
+          <h3>The Gaze</h3>
+          <p class="sk">Virabhadrasana II</p>
+          <p>Chest open, arms reaching front and back, front knee tracking over the ankle. Eyes settle past the front fingertips — steady, unhurried.</p>
+        </article>
+        <article class="pose reveal">
+          <div class="pose-fig"><svg viewBox="0 0 80 120" fill="none" aria-hidden="true"><circle cx="20" cy="40" r="8" fill="currentColor"/><path d="M27 42l36 6M14 56l50-10M40 50l4 50" stroke="currentColor" stroke-width="4" stroke-linecap="round"/></svg></div>
+          <p class="pose-num">03</p>
+          <h3>The Balance</h3>
+          <p class="sk">Virabhadrasana III</p>
+          <p>Hinge forward onto one standing leg until body and lifted leg form a single straight line, parallel to the floor. Stillness becomes the whole pose.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SCHEDULE ============ -->
+  <section id="schedule">
+    <div class="wrap">
+      <div class="sec-head reveal"><span class="sec-num">03</span><h2>Upcoming classes</h2></div>
+      <p class="sec-sub reveal">Spots are limited to sixteen per class. Reserve early — sessions fill fast.</p>
+
+      <div class="sched" id="sched"></div>
+    </div>
+  </section>
+
+  <!-- ============ CONTACT ============ -->
+  <section id="contact" style="border-top:1px solid var(--stone-line)">
+    <div class="wrap contact-grid">
+      <div class="reveal">
+        <div class="sec-head"><span class="sec-num">04</span><h2>Drop a note</h2></div>
+        <p class="sec-sub">Ready to take your practice further? Ask about private sessions, teacher training, or your first free class.</p>
+        <dl class="contact-info">
+          <dt>Studio</dt><dd>Abbot Kinney, Los Angeles, CA</dd>
+          <dt>Phone</dt><dd>(646) 580-2349</dd>
+          <dt>Email</dt><dd>hello@vajrawarrior.yoga</dd>
+        </dl>
+      </div>
+
+      <form class="reveal" id="contactForm" novalidate>
+        <div class="field">
+          <label for="cName">Name</label>
+          <input id="cName" name="name" type="text" autocomplete="name" required>
+          <p class="err" id="cName-err" aria-live="polite"></p>
+        </div>
+        <div class="field">
+          <label for="cEmail">Email</label>
+          <input id="cEmail" name="email" type="email" autocomplete="email" required>
+          <p class="err" id="cEmail-err" aria-live="polite"></p>
+        </div>
+        <div class="field">
+          <label for="cMsg">Message</label>
+          <textarea id="cMsg" name="message" required></textarea>
+          <p class="err" id="cMsg-err" aria-live="polite"></p>
+        </div>
+        <button type="submit" class="btn btn-primary" style="margin-top:6px">Send message</button>
+        <p class="err" id="contact-status" aria-live="polite" style="color:var(--brass);margin-top:14px"></p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap foot">
+    <div class="foot-brand">
+      <svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><path d="M24 3v42" stroke="currentColor" stroke-width="2"/><path d="M24 18l5 6-5 6-5-6 5-6z" stroke="currentColor" stroke-width="2"/></svg>
+      Vajra Warrior Yoga
+    </div>
+    <small>© 2026 · Built as a portfolio redesign · Los Angeles</small>
+  </div>
+</footer>
+
+<!-- ============ BOOKING MODAL ============ -->
+<div class="overlay" id="overlay">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" id="modal">
+    <button class="modal-close" id="modalClose" aria-label="Close booking">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+
+    <div id="bookView">
+      <span class="eyebrow" id="modalTitle">Reserve your spot</span>
+      <h3>Claim a mat</h3>
+      <p class="price">$15 per class · pay at checkout</p>
+      <form id="bookForm" novalidate>
+        <div class="field">
+          <label for="bName">Name</label>
+          <input id="bName" name="name" type="text" autocomplete="name" required>
+          <p class="err" id="bName-err" aria-live="polite"></p>
+        </div>
+        <div class="field">
+          <label for="bEmail">Email</label>
+          <input id="bEmail" name="email" type="email" autocomplete="email" required>
+          <p class="err" id="bEmail-err" aria-live="polite"></p>
+        </div>
+        <div class="field">
+          <label for="bClass">Class</label>
+          <select id="bClass" name="class" required></select>
+          <p class="err" id="bClass-err" aria-live="polite"></p>
+        </div>
+        <button type="submit" class="btn btn-primary">Continue to payment — $15</button>
+      </form>
     </div>
 
-    <!-- Navbar on small screens (remove the onclick attribute if you want the navbar to always show on top of the content when clicking on the links) -->
-    <div id="navDemo" class="w3-bar-block w3-black w3-hide w3-hide-large w3-hide-medium w3-top" style="margin-top:46px">
-    <a href="#about" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">ABOUT</a>
-    <a href="#classes" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">CLASSES</a>
-    <a href="#contact" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">CONTACT</a>
-    <a href="#" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">ASANAS</a>
+    <div id="successView" class="success" hidden>
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <h3 class="display">You're on the mat</h3>
+      <p id="successMsg">Check your email for confirmation and studio details.</p>
+      <button class="btn btn-ghost" id="successDone" style="margin-top:24px">Done</button>
     </div>
+  </div>
+</div>
 
-    <!-- Page content -->
-    <div class="w3-content" style="max-width:2000px;margin-top:46px">
+<script>
+(function(){
+  "use strict";
 
-    <!-- Automatic Slideshow Images -->
-    <div class="mySlides w3-display-container w3-center">
-        <img src="https://www.sydney.edu.au/content/dam/corporate/images/news-and-opinion/news/2017/june/Yoga_class.jpg" style="width:100%">
-        <div class="w3-display-bottommiddle w3-container w3-text-white w3-padding-32 w3-hide-small">
-        <h3>Los Angeles</h3>
-        <p><b>We had the best time practicing at Venice Beach!</b></p>   
-        </div>
-    </div>
-    <div class="mySlides w3-display-container w3-center">
-        <img src="https://tnuqq21kt870t8n1egkbrmbr-wpengine.netdna-ssl.com/wp-content/uploads/2015/02/yoga-class-amanda.jpg" style="width:100%">
-        <div class="w3-display-bottommiddle w3-container w3-text-white w3-padding-32 w3-hide-small">
-        <h3>New York</h3>
-        <p><b>The atmosphere in New York is energetic.</b></p>    
-        </div>
-    </div>
-    <div class="mySlides w3-display-container w3-center">
-        <img src="https://yoga2all.com/wp-content/uploads/2018/02/Yoga-class.jpg" style="width:100%">
-        <div class="w3-display-bottommiddle w3-container w3-text-white w3-padding-32 w3-hide-small">
-        <h3>Chicago</h3>
-        <p><b>Thank you, Chicago - A weekend we won't forget.</b></p>    
-        </div>
-    </div>
+  /* ---------- class data (would come from an API in production) ---------- */
+  var CLASSES = [
+    {city:"Venice Beach", when:"Mon · Mar 9 · 7:00 AM", status:"open"},
+    {city:"Echo Park",     when:"Wed · Mar 11 · 6:30 PM", status:"open"},
+    {city:"Santa Monica",  when:"Fri · Mar 13 · 8:00 AM", status:"full"},
+    {city:"Silver Lake",   when:"Sun · Mar 15 · 9:00 AM", status:"open"}
+  ];
 
-    <!-- The About Section -->
-    <div class="w3-container w3-content w3-center w3-padding-64" style="max-width:800px" id="about">
-        <h2 class="w3-wide">VAJRA WARRIOR YOGA</h2>
-        <p class="w3-opacity"><i>We love yoga</i></p>
-        <p class="w3-justify">I have created a yoga studio website for my personal business. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-        ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur
-        adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-        <div class="w3-row w3-padding-32">
-        <div class="w3-third">
-            <p>Virabhadrasana I</p>
-            <img src="https://www.yogajournal.com/wp-content/uploads/sites/17/2018/12/2yp_290_1642_bjk.jpg" class="w3-round w3-margin-bottom" alt="Warrior 1" style="width:60%">
-        </div>
-        <div class="w3-third">
-            <p>Virabhadrasana II</p>
-            <img src="https://www.yogajournal.com/wp-content/uploads/sites/17/2007/08/2hp_291_1870_gn_bjk.jpg" class="w3-round w3-margin-bottom" alt="Warrior 2" style="width:60%">
-        </div>
-        <div class="w3-third">
-            <p>Virabhadrasana III</p>
-            <img src="https://www.yogajournal.com/wp-content/uploads/sites/17/2017/07/warrioranatomy_292_36462_cmyk.jpg" class="w3-round" alt="Warrior 3" style="width:60%">
-        </div>
-        </div>
-    </div>
+  /* ---------- render schedule ---------- */
+  var sched = document.getElementById("sched");
+  CLASSES.forEach(function(c){
+    var row = document.createElement("div");
+    row.className = "sched-row reveal";
+    var full = c.status === "full";
+    row.innerHTML =
+      '<div class="sched-city">'+c.city+'</div>'+
+      '<div class="sched-when">'+c.when+'</div>'+
+      '<span class="tag '+(full?'full':'open')+'">'+(full?'Sold out':'Open')+'</span>'+
+      '<button class="row-btn" '+(full?'disabled':'data-book="'+c.city+'"')+'>'+(full?'Waitlist full':'Reserve')+'</button>';
+    sched.appendChild(row);
+  });
 
-    <!-- The Class Section -->
-    <div class="w3-black" id="classes">
-        <div class="w3-container w3-content w3-padding-64" style="max-width:800px">
-        <h2 class="w3-wide w3-center">CLASS DATES</h2>
-        <p class="w3-opacity w3-center"><i>Remember to reserve your spots!</i></p><br>
+  /* ---------- populate modal class select ---------- */
+  var classSelect = document.getElementById("bClass");
+  CLASSES.filter(function(c){return c.status!=="full";}).forEach(function(c){
+    var o = document.createElement("option");
+    o.value = c.city; o.textContent = c.city + " — " + c.when;
+    classSelect.appendChild(o);
+  });
 
-        <ul class="w3-ul w3-border w3-white w3-text-grey">
-            <li class="w3-padding">January <span class="w3-tag w3-red w3-margin-left">Sold out</span></li>
-            <li class="w3-padding">February <span class="w3-tag w3-red w3-margin-left">Sold out</span></li>
-            <li class="w3-padding">March <span class="w3-badge w3-right w3-margin-right">3</span></li>
-            <li class="w3-padding">April <span class="w3-badge w3-right w3-margin-right">4</span></li>
-            <li class="w3-padding">May <span class="w3-badge w3-right w3-margin-right">2</span></li>
-        </ul>
+  /* ---------- header scroll state ---------- */
+  var header = document.getElementById("header");
+  var onScroll = function(){ header.classList.toggle("scrolled", window.scrollY > 24); };
+  window.addEventListener("scroll", onScroll, {passive:true}); onScroll();
 
-        <div class="w3-row-padding w3-padding-32" style="margin:0 -16px">
-            <div class="w3-third w3-margin-bottom">
-            <img src="https://yoga2all.com/wp-content/uploads/2018/02/Yoga-class.jpg" alt="New York" style="width:100%" class="w3-hover-opacity">
-            <div class="w3-container w3-white">
-                <p><b>New York</b></p>
-                <p class="w3-opacity">Mon 8 March 2021</p>
-                <p>Praesent tincidunt sed tellus ut rutrum sed vitae justo.</p>
-                <button class="w3-button w3-black w3-margin-bottom" onclick="document.getElementById('ticketModal').style.display='block'">Reserve Spot!</button>
-            </div>
-            </div>
-            <div class="w3-third w3-margin-bottom">
-            <img src="https://www.sydney.edu.au/content/dam/corporate/images/news-and-opinion/news/2017/june/Yoga_class.jpg" alt="Paris" style="width:100%" class="w3-hover-opacity">
-            <div class="w3-container w3-white">
-                <p><b>Paris</b></p>
-                <p class="w3-opacity">Wed 10 March 2021</p>
-                <p>Praesent tincidunt sed tellus ut rutrum sed vitae justo.</p>
-                <button class="w3-button w3-black w3-margin-bottom" onclick="document.getElementById('ticketModal').style.display='block'">Reserve Spot!</button>
-            </div>
-            </div>
-            <div class="w3-third w3-margin-bottom">
-            <img src="https://media.blogto.com/articles/d486-20160622-outdooryoga.jpg?width=1300&quality=70" alt="San Francisco" style="width:100%" class="w3-hover-opacity">
-            <div class="w3-container w3-white">
-                <p><b>San Francisco</b></p>
-                <p class="w3-opacity">Fri 12 March 2021</p>
-                <p>Praesent tincidunt sed tellus ut rutrum sed vitae justo.</p>
-                <button class="w3-button w3-black w3-margin-bottom" onclick="document.getElementById('ticketModal').style.display='block'">Reserve Spot!</button>
-            </div>
-            </div>
-        </div>
-        </div>
-    </div>
+  /* ---------- mobile nav ---------- */
+  var menuBtn = document.getElementById("menuBtn");
+  var nav = document.getElementById("nav");
+  menuBtn.addEventListener("click", function(){
+    var open = nav.classList.toggle("open");
+    menuBtn.setAttribute("aria-expanded", String(open));
+    menuBtn.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+  });
+  nav.addEventListener("click", function(e){
+    if(e.target.tagName === "A"){ nav.classList.remove("open"); menuBtn.setAttribute("aria-expanded","false"); }
+  });
 
-    <!-- Ticket Modal -->
-    <div id="ticketModal" class="w3-modal">
-        <div class="w3-modal-content w3-animate-top w3-card-4">
-        <header class="w3-container w3-teal w3-center w3-padding-32"> 
-            <span onclick="document.getElementById('ticketModal').style.display='none'" 
-        class="w3-button w3-teal w3-xlarge w3-display-topright">×</span>
-            <h2 class="w3-wide"><i class="fa fa-suitcase w3-margin-right"></i>Tickets</h2>
-        </header>
-        <div class="w3-container">
-            <p><label><i class="fa fa-shopping-cart"></i> Reservation, $15 per person</label></p>
-            <input class="w3-input w3-border" type="text" placeholder="How many?">
-            <p><label><i class="fa fa-user"></i> Send To</label></p>
-            <input class="w3-input w3-border" type="text" placeholder="Enter email">
-            <button class="w3-button w3-block w3-teal w3-padding-16 w3-section w3-right">PAY <i class="fa fa-check"></i></button>
-            <button class="w3-button w3-red w3-section" onclick="document.getElementById('ticketModal').style.display='none'">Close <i class="fa fa-remove"></i></button>
-            <p class="w3-right">Need <a href="#" class="w3-text-blue">help?</a></p>
-        </div>
-        </div>
-    </div>
+  /* ---------- scroll reveal (respects reduced motion) ---------- */
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if(reduce){
+    document.querySelectorAll(".reveal").forEach(function(el){el.classList.add("in");});
+  } else if("IntersectionObserver" in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(en.isIntersecting){ en.target.classList.add("in"); io.unobserve(en.target); }
+      });
+    }, {threshold:.14});
+    document.querySelectorAll(".reveal").forEach(function(el){io.observe(el);});
+  } else {
+    document.querySelectorAll(".reveal").forEach(function(el){el.classList.add("in");});
+  }
 
-    <!-- The Contact Section -->
-    <div class="w3-container w3-content w3-padding-64" style="max-width:800px" id="contact">
-        <h2 class="w3-wide w3-center">CONTACT</h2>
-        <p class="w3-opacity w3-center"><i>Interested in taking your practice to the next level? Drop a note!</i></p>
-        <div class="w3-row w3-padding-32">
-        <div class="w3-col m6 w3-large w3-margin-bottom">
-            <i class="fa fa-map-marker" style="width:30px"></i> Los Angeles, US<br>
-            <i class="fa fa-phone" style="width:30px"></i> Phone: 646-580-2349<br>
-            <i class="fa fa-envelope" style="width:30px"> </i> Email: vajraWarrior@vajraYoga.com<br>
-        </div>
-        <div class="w3-col m6">
-            <form action="/action_page.php" target="_blank">
-            <div class="w3-row-padding" style="margin:0 -16px 8px -16px">
-                <div class="w3-half">
-                <input class="w3-input w3-border" type="text" placeholder="Name" required name="Name">
-                </div>
-                <div class="w3-half">
-                <input class="w3-input w3-border" type="text" placeholder="Email" required name="Email">
-                </div>
-            </div>
-            <input class="w3-input w3-border" type="text" placeholder="Message" required name="Message">
-            <button class="w3-button w3-black w3-section w3-right" type="submit">SEND</button>
-            </form>
-        </div>
-        </div>
-    </div>
-    
-    <!-- End Page Content -->
-    </div>
+  /* ---------- accessible modal ---------- */
+  var overlay  = document.getElementById("overlay");
+  var modal    = document.getElementById("modal");
+  var closeBtn = document.getElementById("modalClose");
+  var bookView = document.getElementById("bookView");
+  var okView   = document.getElementById("successView");
+  var lastFocus = null;
 
-    <!-- Image of location/map -->
-    <img src="https://www.w3schools.com/w3images/map.jpg" class="w3-image w3-greyscale-min" style="width:100%">
-
-    <!-- Footer -->
-    <footer class="w3-container w3-padding-64 w3-center w3-opacity w3-light-grey w3-xlarge">
-    <i class="fa fa-facebook-official w3-hover-opacity"></i>
-    <i class="fa fa-instagram w3-hover-opacity"></i>
-    <i class="fa fa-snapchat w3-hover-opacity"></i>
-    <i class="fa fa-pinterest-p w3-hover-opacity"></i>
-    <i class="fa fa-twitter w3-hover-opacity"></i>
-    <i class="fa fa-linkedin w3-hover-opacity"></i>
-    </footer>
-
-    <script>
-    // Automatic Slideshow - change image every 4 seconds
-    var myIndex = 0;
-    carousel();
-
-    function carousel() {
-    var i;
-    var x = document.getElementsByClassName("mySlides");
-    for (i = 0; i < x.length; i++) {
-        x[i].style.display = "none";  
+  function focusable(){
+    return Array.prototype.slice.call(
+      modal.querySelectorAll('button,[href],input,select,textarea,[tabindex]:not([tabindex="-1"])')
+    ).filter(function(el){ return !el.disabled && el.offsetParent !== null; });
+  }
+  function openModal(preselect){
+    lastFocus = document.activeElement;
+    bookView.hidden = false; okView.hidden = true;
+    if(preselect){
+      for(var i=0;i<classSelect.options.length;i++){
+        if(classSelect.options[i].value === preselect){ classSelect.selectedIndex = i; break; }
+      }
     }
-    myIndex++;
-    if (myIndex > x.length) {myIndex = 1}    
-    x[myIndex-1].style.display = "block";  
-    setTimeout(carousel, 4000);    
-    }
+    overlay.classList.add("open");
+    document.body.style.overflow = "hidden";
+    var f = focusable(); if(f.length) f[0].focus();
+  }
+  function closeModal(){
+    overlay.classList.remove("open");
+    document.body.style.overflow = "";
+    clearErrors(document.getElementById("bookForm"));
+    if(lastFocus) lastFocus.focus();
+  }
 
-    // Used to toggle the menu on small screens when clicking on the menu button
-    function myFunction() {
-    var x = document.getElementById("navDemo");
-    if (x.className.indexOf("w3-show") == -1) {
-        x.className += " w3-show";
-    } else { 
-        x.className = x.className.replace(" w3-show", "");
-    }
-    }
+  // open triggers (any element with data-book)
+  document.addEventListener("click", function(e){
+    var t = e.target.closest("[data-book]");
+    if(t){ e.preventDefault(); openModal(t.getAttribute("data-book") || ""); }
+  });
+  closeBtn.addEventListener("click", closeModal);
+  document.getElementById("successDone").addEventListener("click", closeModal);
+  overlay.addEventListener("mousedown", function(e){ if(e.target === overlay) closeModal(); });
 
-    // When the user clicks anywhere outside of the modal, close it
-    var modal = document.getElementById('ticketModal');
-    window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
+  document.addEventListener("keydown", function(e){
+    if(!overlay.classList.contains("open")) return;
+    if(e.key === "Escape"){ closeModal(); return; }
+    if(e.key === "Tab"){                       // focus trap
+      var f = focusable(); if(!f.length) return;
+      var first = f[0], last = f[f.length-1];
+      if(e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+      else if(!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
     }
-    }
-    </script>
+  });
 
-    </body>
+  /* ---------- validation helpers ---------- */
+  var EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  function setError(input, msg){
+    var err = document.getElementById(input.id + "-err");
+    if(err) err.textContent = msg || "";
+    input.setAttribute("aria-invalid", msg ? "true" : "false");
+  }
+  function clearErrors(form){
+    form.querySelectorAll("input,select,textarea").forEach(function(i){ setError(i,""); });
+  }
+  function validateField(input){
+    var v = input.value.trim();
+    if(input.hasAttribute("required") && !v){ setError(input,"Required"); return false; }
+    if(input.type === "email" && v && !EMAIL.test(v)){ setError(input,"Enter a valid email"); return false; }
+    setError(input,""); return true;
+  }
+
+  function wireValidation(form, onValid){
+    form.querySelectorAll("input,select,textarea").forEach(function(i){
+      i.addEventListener("blur", function(){ validateField(i); });
+      i.addEventListener("input", function(){ if(i.getAttribute("aria-invalid")==="true") validateField(i); });
+    });
+    form.addEventListener("submit", function(e){
+      e.preventDefault();
+      var ok = true, firstBad = null;
+      form.querySelectorAll("input,select,textarea").forEach(function(i){
+        if(!validateField(i)){ ok = false; if(!firstBad) firstBad = i; }
+      });
+      if(!ok){ if(firstBad) firstBad.focus(); return; }
+      onValid(form);
+    });
+  }
+
+  /* ---------- booking submit ----------
+     In production this is where you'd POST to /api/reserve and
+     redirect to Stripe Checkout. Here we mock the success state. */
+  wireValidation(document.getElementById("bookForm"), function(form){
+    var name  = form.querySelector("#bName").value.trim();
+    var klass = form.querySelector("#bClass").value;
+    document.getElementById("successMsg").textContent =
+      "Thanks, " + name + " — your spot for " + klass + " is held. Check your email for confirmation.";
+    bookView.hidden = true; okView.hidden = false;
+    document.getElementById("successDone").focus();
+  });
+
+  /* ---------- contact submit ---------- */
+  wireValidation(document.getElementById("contactForm"), function(form){
+    document.getElementById("contact-status").textContent = "Message sent — we'll reply within a day.";
+    form.reset();
+  });
+})();
+</script>
+</body>
 </html>
